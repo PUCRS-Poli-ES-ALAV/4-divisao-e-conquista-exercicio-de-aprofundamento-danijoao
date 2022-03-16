@@ -76,3 +76,47 @@ print("time to 1048576: " + str(end - start))
 # time to 32: 0.0
 # time to 2048: 0.0069997310638427734
 # time to 1048576: 3.7231509685516357"""
+
+#4
+import math
+cont = 0
+
+def multiply(x, y, n):
+    global cont
+    cont += 1
+
+    if(n == 1):
+        return x * y
+    else:
+        m = n // 2
+        p = int(math.pow(2, m))
+        a = x // p
+        b = x % p
+        c = y // p
+        d = y % p
+        e = multiply(a,c,m)
+        f = multiply(b,d,m)
+        g = multiply(b,c,m)
+        h = multiply(a,d,m)
+        return int(math.pow(2, 2 *m )) * e + int(math.pow(2, m)) *(g+h) + f
+
+start = time.time()
+multiply(15,15,4)
+end = time.time()
+print("time to 4 bits: " + str(end - start) + "\tIterations: " + str(cont))
+
+start = time.time()
+multiply(15,15,16)
+end = time.time()
+print("time to 16 bits: " + str(end - start) + "\tIterations: " + str(cont))
+
+start = time.time()
+multiply(15,15,64)
+end = time.time()
+print("time to 64 bits: " + str(end - start) + "\tIterations: " + str(cont))
+
+start = time.time()
+multiply(9223372036854775807,9223372036854775807,64)
+end = time.time()
+print("time to 64 bits: " + str(end - start) + "\tIterations: " + str(cont))
+
